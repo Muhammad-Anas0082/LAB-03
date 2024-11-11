@@ -1,0 +1,93 @@
+import java.util.Scanner;
+
+public class Marksheet {
+
+    // Method to calculate percentage
+    public static double calculatePercentage(double obtainedMarks, double totalMarks) {
+        return (obtainedMarks / totalMarks) * 100;
+    }
+
+    // Method to calculate grade based on percentage
+    public static String calculateGrade(double percentage) {
+        if (percentage >= 90) {
+            return "A+";
+        } else if (percentage >= 80) {
+            return "A";
+        } else if (percentage >= 70) {
+            return "B+";
+        } else if (percentage >= 60) {
+            return "B";
+        } else if (percentage >= 50) {
+            return "C";
+        } else if (percentage >= 40) {
+            return "D";
+        } else {
+            return "F";
+        }
+    }
+
+    // Method to calculate GPA based on percentage
+    public static double calculateGPA(double percentage) {
+        if (percentage >= 90) {
+            return 4.0;
+        } else if (percentage >= 80) {
+            return 3.7;
+        } else if (percentage >= 70) {
+            return 3.0;
+        } else if (percentage >= 60) {
+            return 2.5;
+        } else if (percentage >= 50) {
+            return 2.0;
+        } else if (percentage >= 40) {
+            return 1.0;
+        } else {
+            return 0.0;
+        }
+    }
+
+    // Method to display the marksheet in a viewable format
+    public static void printMarksheet(String studentName, double obtainedMarks, double totalMarks, double percentage, String grade, double gpa) {
+        System.out.println("\n--------------------------");
+        System.out.println("Marksheet for: " + studentName);
+        System.out.println("--------------------------");
+        System.out.println("Total Marks: " + totalMarks);
+        System.out.println("Obtained Marks: " + obtainedMarks);
+        System.out.printf("Percentage: %.2f%%\n", percentage);
+        System.out.println("Grade: " + grade);
+        System.out.printf("GPA: %.2f\n", gpa);
+        System.out.println("--------------------------");
+    }
+
+    // Main method to drive the program
+    public static void main(String[] args) {
+        // Create Scanner object to take input from the user
+        Scanner scanner = new Scanner(System.in);
+
+        // Taking input from the user
+        System.out.print("Enter student name: ");
+        String studentName = scanner.nextLine();
+
+        System.out.print("Enter total marks: ");
+        double totalMarks = scanner.nextDouble();
+
+        System.out.print("Enter obtained marks: ");
+        double obtainedMarks = scanner.nextDouble();
+
+        // Checking if obtained marks are valid
+        if (obtainedMarks > totalMarks) {
+            System.out.println("Error: Obtained marks cannot be greater than total marks.");
+            return;
+        }
+
+        // Calculating percentage, grade, and GPA
+        double percentage = calculatePercentage(obtainedMarks, totalMarks);
+        String grade = calculateGrade(percentage);
+        double gpa = calculateGPA(percentage);
+
+        // Displaying the result
+        printMarksheet(studentName, obtainedMarks, totalMarks, percentage, grade, gpa);
+
+        // Close the scanner object
+        scanner.close();
+    }
+}
